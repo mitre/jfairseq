@@ -9,6 +9,7 @@ import org.pytorch.Tensor;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +41,7 @@ public class FairseqTranslator {
     public String translate(String sent) throws Exception {
         String tokenizedSent = tokenizer.tokenize(sent);
         String encodedSent = encoder.encode(tokenizedSent);
-        Tensor ids = sourceDict.encodeLine(encodedSent, line -> line.split("\\s+"));
+        Tensor ids = sourceDict.encodeLine(encodedSent, line -> line.split("\\s+"), false);
 
         Map<String, IValue> map = new HashMap<>();
         Map<String, IValue> inner_map = new HashMap<>();
