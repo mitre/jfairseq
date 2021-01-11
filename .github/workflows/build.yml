@@ -19,13 +19,21 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: ${{ matrix.java }}
+    - uses: actions/checkout@master
+      with:
+        repository: mitre/jfastbpe
+        path: ./jfastbpe
+    - uses: actions/checkout@master
+      with:
+        repository: levyfan/sentencepiece-jni
+        path: ./sentencepiece-jni
     - name: Setup jFastBPE
-      run: git clone git@github.com:mitre/jfastbpe.git && cd jfastbpe && gradle test build jar publishToMavenLocal
+      run: cd jfastbpe && gradle test build jar publishToMavenLocal
     - name: Setup sentencepiece-jni on Windows
-      run: git clone git@github.com:levyfan/sentencepiece-jni.git && cd sentencepiece-jni && mvn -f pom-windows.xml clean install
+      run: cd sentencepiece-jni && mvn -f pom-windows.xml clean install
       if: matrix.os == 'windows-latest'
     - name: Setup sentencepiece-jni on non-Windows
-      run: git clone git@github.com:levyfan/sentencepiece-jni.git && cd sentencepiece-jni && mvn -f pom.xml clean install
+      run: cd sentencepiece-jni && mvn clean install
       if: matrix.os != 'windows-latest'
     - name: Build
       run: gradle test build jar
