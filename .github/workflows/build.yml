@@ -19,6 +19,7 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: ${{ matrix.java }}
+    - uses: olafurpg/setup-scala@v10
     - uses: actions/checkout@master
       with:
         repository: mitre/jfastbpe
@@ -36,4 +37,4 @@ jobs:
       run: cd sentencepiece-jni && mvn clean install
       if: matrix.os != 'windows-latest'
     - name: Build
-      run: gradle test build jar
+      run: sbt compile package
