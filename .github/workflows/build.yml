@@ -26,7 +26,7 @@ jobs:
         path: ./jfastbpe
     - uses: actions/checkout@master
       with:
-        repository: levyfan/sentencepiece-jni
+        repository: erip/sentencepiece-jni
         path: ./sentencepiece-jni
     - name: Setup jFastBPE
       run: cd jfastbpe && gradle test build jar publishToMavenLocal
