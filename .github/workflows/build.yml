@@ -1,0 +1,43 @@
+name: Build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    strategy:
+      max-parallel: 10
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        java: [adopt@1.8, adopt@1.9, adopt@1.10, adopt@1.11]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: set up JDK
+      uses: actions/setup-java@v1
+      with:
+         java-version: 8
+    - uses: olafurpg/setup-scala@v10
+      with:
+         java-version: ${{ matrix.java }}
+    - uses: actions/checkout@master
+      with:
+        repository: mitre/jfastbpe
+        path: ./jfastbpe
+    - uses: actions/checkout@master
+      with:
+        repository: erip/sentencepiece-jni
+        path: ./sentencepiece-jni
+    - name: Setup jFastBPE
+      run: cd jfastbpe && gradle test build jar publishToMavenLocal
+    - name: Setup sentencepiece-jni on Windows
+      run: cd sentencepiece-jni && mvn -f pom-windows.xml clean install
+      if: matrix.os == 'windows-latest'
+    - name: Setup sentencepiece-jni on non-Windows
+      run: cd sentencepiece-jni && mvn clean install
+      if: matrix.os != 'windows-latest'
+    - name: Build
+      run: sbt -J-Xms1024m -J-Xmx1024m compile package
+      

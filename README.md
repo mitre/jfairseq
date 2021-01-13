@@ -8,14 +8,14 @@ This repo serves to provide limited Java runtime support for scripted [fairseq](
 
 To build this repo, the following repos must first be published to the local Maven repository:
 
-- [sentencepiece-jni](https://github.com/levyfan/sentencepiece-jni)
+- [sentencepiece-jni](https://github.com/erip/sentencepiece-jni)
 - [jFastBPE](https://github.com/mitre/jfastbpe)
 
-Once this is done, jFairseq can be built by issuing `./gradlew clean build`.
+Once this is done, jFairseq can be built by issuing `sbt clean compile package`.
 
 ## Tests
 
-Tests can be run by issuing `./gradlew test`.
+Tests can be run by issuing `sbt  test`.
 
 ## Authors
 
