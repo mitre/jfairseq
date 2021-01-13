@@ -39,4 +39,5 @@ jobs:
       run: cd sentencepiece-jni && mvn clean install
       if: matrix.os != 'windows-latest'
     - name: Build
-      run: sbt compile package
+      run: sbt -J-Xms1024m -J-Xmx1024m compile package
+      
