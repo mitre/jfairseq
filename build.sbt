@@ -16,9 +16,6 @@ lazy val root = (project in file("."))
         prev.withClassifier(Some(osDetectorClassifier.value))
     },
 
-    artifactName := { (sv: ScalaVersion, module: ModuleID, artifact: Artifact) =>
-        artifact.name + "-" + module.revision + "-" + osDetectorClassifier.value + "." + artifact.extension
-    },
     publishMavenStyle := true,
     libraryDependencies ++= Seq(
       "com.github.levyfan" % "sentencepiece" % "0.0.1-SNAPSHOT" classifier osDetectorClassifier.value,
