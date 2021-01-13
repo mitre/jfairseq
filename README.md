@@ -1,5 +1,7 @@
 # jFairseq: a Java frontend for fairseq Scripted Models
 
+![Build](https://github.com/mitre/jfairseq/workflows/Build/badge.svg)
+
 ## Motivation
 
 This repo serves to provide limited Java runtime support for scripted [fairseq](https://github.com/pytorch/fairseq/) translation models. 
