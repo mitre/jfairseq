@@ -28,16 +28,12 @@ jobs:
         path: ./jfastbpe
     - uses: actions/checkout@master
       with:
-        repository: erip/sentencepiece-jni
+        repository: levyfan/sentencepiece-jni
         path: ./sentencepiece-jni
     - name: Setup jFastBPE
       run: cd jfastbpe && gradle test build jar publishToMavenLocal
-    - name: Setup sentencepiece-jni on Windows
-      run: cd sentencepiece-jni && mvn -f pom-windows.xml clean install
-      if: matrix.os == 'windows-latest'
-    - name: Setup sentencepiece-jni on non-Windows
+    - name: Setup sentencepiece-jni
       run: cd sentencepiece-jni && mvn clean install
-      if: matrix.os != 'windows-latest'
     - name: Build
       run: sbt -J-Xms1024m -J-Xmx1024m compile package
       
