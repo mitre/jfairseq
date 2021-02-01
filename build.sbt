@@ -18,7 +18,7 @@ lazy val root = (project in file("."))
 
     publishMavenStyle := true,
     libraryDependencies ++= Seq(
-      "com.github.levyfan" % "sentencepiece" % "0.0.1-SNAPSHOT" classifier osDetectorClassifier.value,
+      "com.github.levyfan" % "sentencepiece" % "0.0.2" classifier osDetectorClassifier.value,
       "junit" % "junit" % "4.12" % Test,
       "org.pytorch" % "pytorch_java_only" % "1.5.0",
       "org.mitre" % "jfastbpe" % "1.0-SNAPSHOT"
